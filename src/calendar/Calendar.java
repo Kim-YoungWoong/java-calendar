@@ -3,13 +3,13 @@ package calendar;
 import java.util.Scanner;
 
 public class Calendar {
-	
+
 	private static final int[] MAX_DAYS = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
 
 	public int getMaxDaysofMonth(int month) {
 		return MAX_DAYS[month - 1];
 	}
-	
+
 	public void printSampleCalendar() {
 		System.out.println("일	월	화	수	목	금	토");
 		System.out.println("--------------------------------------------------");
@@ -20,18 +20,23 @@ public class Calendar {
 	}
 
 	public static void main(String[] args) {
-		
+
+		String PROMPT = "cal> ";
 		Scanner sc = new Scanner(System.in);
 		Calendar cal = new Calendar();
-		
-		System.out.print("반복횟수를 입력하세요: ");
-		int cnt=sc.nextInt();
-		
-		for(int i=0;i<cnt;i++) {
-			System.out.print("달을 입력하세요: ");
-			int month = sc.nextInt();
-			
-			System.out.printf("%d월은 %d일까지 있습니다.\n",month,cal.getMaxDaysofMonth(month));
+
+		int month = 0;
+		while (true) {
+			System.out.println("달을 입력하세요...-1을 입력하면 종료합니다.");
+			System.out.print(PROMPT);
+			month = sc.nextInt();
+			if (month == -1) {
+				break;
+			}
+			if(month>12) {
+				continue;
+			}
+			System.out.printf("%d월은 %d일까지 있습니다.\n", month, cal.getMaxDaysofMonth(month));
 		}
 		System.out.print("끝");
 		sc.close();
